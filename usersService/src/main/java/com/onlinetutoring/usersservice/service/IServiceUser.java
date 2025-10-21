@@ -14,7 +14,6 @@ public interface IServiceUser {
     User assignSubject(Long userId, Long subjectId);
     User removeSubject(Long userId, Long subjectId);
 
-    User getByEmail(String email);
-    User getByUsername(String username);
+
 }
 

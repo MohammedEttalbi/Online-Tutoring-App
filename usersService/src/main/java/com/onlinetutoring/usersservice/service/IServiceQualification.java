@@ -10,6 +10,4 @@ public interface IServiceQualification {
     List<Qualification> getAllQualifications();
     Qualification updateQualification(Qualification qualification);
     void deleteQualification(Long id);
-
-    List<Qualification> getQualificationsByTutorId(Long tutorId);
 }

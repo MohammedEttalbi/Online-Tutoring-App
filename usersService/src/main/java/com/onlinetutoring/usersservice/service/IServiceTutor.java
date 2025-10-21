@@ -5,6 +5,9 @@ import com.onlinetutoring.usersservice.domain.entity.Tutor;
 import java.util.List;
 
 public interface IServiceTutor {
-    Tutor create(Tutor t);
-    List<Tutor> findByMinRating(double min);
+    Tutor createTutor(Tutor tutor);
+    Tutor getTutorById(Long id);
+    List<Tutor> getAllTutors();
+    Tutor updateTutor(Tutor tutor);
+    void deleteTutor(Long id);
 }

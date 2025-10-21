@@ -1,5 +1,6 @@
 package com.onlinetutoring.usersservice.domain.entity;
 
+import com.onlinetutoring.usersservice.domain.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "TYPE",length = 4)
 public class User {
 
     @Id
@@ -27,6 +29,9 @@ public class User {
 
     @Column(nullable = false, length = 180)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(

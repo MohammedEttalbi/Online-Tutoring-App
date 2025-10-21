@@ -11,5 +11,4 @@ public interface IServiceSubject {
     Subject updateSubject(Subject subject);
     void deleteSubject(Long id);
 
-    Subject getSubjectByName(String name);
 }
