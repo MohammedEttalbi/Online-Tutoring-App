@@ -1,15 +1,19 @@
-package com.onlinetutoring.usersservice.domain.dto;
+package com.onlinetutoring.usersservice.domain.dto.user;
 
+import com.onlinetutoring.usersservice.domain.enums.Role;
 import jakarta.validation.constraints.*;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
 /**
- * DTO for {@link com.onlinetutoring.usersservice.domain.entity.Student}
+ * DTO for {@link com.onlinetutoring.usersservice.domain.entity.User}
  */
 @Value
-public class StudentDto implements Serializable {
+@Getter
+@Setter
+@AllArgsConstructor
+public class UserCreateUpdateDto implements Serializable {
     @NotNull
     @Size(max = 80)
     @NotEmpty
@@ -27,9 +31,5 @@ public class StudentDto implements Serializable {
     @NotBlank
     String email;
     @NotNull
-    @Size(max = 80)
-    @Email
-    @NotEmpty
-    @NotBlank
-    String level;
+    Role role;
 }
