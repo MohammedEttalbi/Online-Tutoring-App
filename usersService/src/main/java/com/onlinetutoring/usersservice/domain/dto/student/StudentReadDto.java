@@ -1,10 +1,7 @@
 package com.onlinetutoring.usersservice.domain.dto.student;
 
 import com.onlinetutoring.usersservice.domain.enums.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -14,7 +11,9 @@ import java.io.Serializable;
 @Value
 @Getter
 @Setter
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
+
 public class StudentReadDto implements Serializable {
     String firstName;
     String lastName;

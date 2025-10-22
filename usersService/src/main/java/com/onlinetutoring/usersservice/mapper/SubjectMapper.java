@@ -11,9 +11,9 @@ import java.util.Set;
 public interface SubjectMapper {
     Subject toEntity(SubjectCreateUpdateDto subjectCreateUpdateDto);
 
-    SubjectCreateUpdateDto toDto(Subject subject);
+    SubjectReadDto toReadDto(Subject subject);
 
-    Set<SubjectReadDto> toReadDtoSet(Set<Subject> docteurs);
+    Set<SubjectReadDto> toReadDtoSet(Set<Subject> subjects);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Subject partialUpdate(SubjectCreateUpdateDto subjectCreateUpdateDto, @MappingTarget Subject subject);

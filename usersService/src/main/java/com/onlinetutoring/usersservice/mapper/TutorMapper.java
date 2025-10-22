@@ -1,5 +1,6 @@
 package com.onlinetutoring.usersservice.mapper;
 
+import com.onlinetutoring.usersservice.domain.dto.student.StudentReadDto;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorReadDto;
 import com.onlinetutoring.usersservice.domain.entity.Tutor;
@@ -11,9 +12,9 @@ import java.util.Set;
 public interface TutorMapper {
     Tutor toEntity(TutorCreateUpdateDto tutorCreateUpdateDto);
 
-    TutorCreateUpdateDto toDto(Tutor tutor);
+    TutorReadDto toReadDto(Tutor tutor);
 
-    Set<TutorReadDto> toReadDtoSet(Set<Tutor> docteurs);
+    Set<TutorReadDto> toReadDtoSet(Set<Tutor> tutors);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Tutor partialUpdate(TutorCreateUpdateDto tutorCreateUpdateDto, @MappingTarget Tutor tutor);

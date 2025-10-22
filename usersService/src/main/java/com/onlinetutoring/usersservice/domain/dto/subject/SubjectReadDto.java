@@ -1,9 +1,6 @@
 package com.onlinetutoring.usersservice.domain.dto.subject;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +10,7 @@ import java.io.Serializable;
 @Value
 @Getter
 @Setter
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 public class SubjectReadDto implements Serializable {
     String name;

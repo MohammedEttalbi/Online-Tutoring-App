@@ -3,14 +3,16 @@ package com.onlinetutoring.usersservice.domain.entity;
 import jakarta.persistence.*;
 
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
+
+
 
 public class Qualification {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
