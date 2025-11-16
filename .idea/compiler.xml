@@ -10,7 +10,6 @@
         <option name="mapstruct.defaultComponentModel" value="spring" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="usersService" />
       </profile>
@@ -19,6 +18,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="discoveryservice" />
+        <module name="ConfigServer" />
       </profile>
       <profile name="Annotation profile for service_sessions" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -36,6 +36,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="ConfigServer" options="-parameters" />
       <module name="discoveryservice" options="-parameters" />
       <module name="service_sessions" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="usersService" options="-parameters -Amapstruct.defaultComponentModel=spring" />

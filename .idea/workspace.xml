@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="583f5232-3f86-4595-b417-64edb2b9fda2" name="Changes" comment="" />
+    <list default="true" id="583f5232-3f86-4595-b417-64edb2b9fda2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/folderServerConfig/services_sessions.properties" beforeDir="false" afterPath="$PROJECT_DIR$/folderServerConfig/services_sessions.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service_sessions/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usersService/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +64,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.ConfigServerApplication.executor": "Run",
     "Spring Boot.DiscoveryserviceApplication.executor": "Run",
     "Spring Boot.ServiceSessionsApplication.executor": "Run",
     "Spring Boot.UsersServiceApplication.executor": "Run",
@@ -103,6 +112,13 @@
       <script-mode>FILE</script-mode>
       <data-source id="1a1a8bb4-971b-4911-8a19-6beccf2e2090" namespace="schema/&quot;sessionsservicedb&quot;" />
       <method v="2" />
+    </configuration>
+    <configuration name="ConfigServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="ConfigServer" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.onlinetutoring.configserver.ConfigServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="DiscoveryserviceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="discoveryservice" />
@@ -154,7 +170,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1763301984944</updated>
-      <workItem from="1763301986488" duration="2820000" />
+      <workItem from="1763301986488" duration="9158000" />
     </task>
     <servers />
   </component>
