@@ -19,6 +19,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discoveryservice" />
         <module name="ConfigServer" />
+        <module name="GatewayService" />
       </profile>
       <profile name="Annotation profile for service_sessions" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -37,6 +38,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="ConfigServer" options="-parameters" />
+      <module name="GatewayService" options="-parameters" />
       <module name="discoveryservice" options="-parameters" />
       <module name="service_sessions" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="usersService" options="-parameters -Amapstruct.defaultComponentModel=spring" />
