@@ -8,12 +8,12 @@ import java.io.Serializable;
 /**
  * DTO for {@link com.onlinetutoring.usersservice.domain.entity.User}
  */
-@Value
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class UserReadDto implements Serializable {
+    Long id;
     String firstName;
     String lastName;
     String email;

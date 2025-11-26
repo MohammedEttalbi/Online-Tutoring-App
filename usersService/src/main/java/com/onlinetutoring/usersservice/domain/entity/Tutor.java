@@ -13,9 +13,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
-
+@DiscriminatorValue("tutor")
 public class Tutor extends User {
     @Column(length = 2000)
     private String bio;

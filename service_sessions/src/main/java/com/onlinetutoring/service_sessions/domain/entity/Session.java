@@ -24,6 +24,9 @@ public class Session {
     @Column(nullable = false)
     private double duration;
 
+    @Column(nullable = false)
+    private String tutorName;
+
     // Session ↔ Material (Many-to-Many)
     @ManyToMany
     @JoinTable(

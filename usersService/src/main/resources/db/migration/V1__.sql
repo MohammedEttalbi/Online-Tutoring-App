@@ -18,13 +18,13 @@ CREATE TABLE subject
 CREATE TABLE user
 (
     id         BIGINT AUTO_INCREMENT NOT NULL,
-    type       VARCHAR(4)            NULL,
+    type       VARCHAR(20)           NULL,
     first_name VARCHAR(80)           NOT NULL,
     last_name  VARCHAR(80)           NOT NULL,
     email      VARCHAR(180)          NOT NULL,
     `role`     VARCHAR(255)          NULL,
-    level      VARCHAR(60)           NULL,
     bio        VARCHAR(2000)         NULL,
+    level      VARCHAR(60)           NULL,
     CONSTRAINT pk_user PRIMARY KEY (id)
 );
 

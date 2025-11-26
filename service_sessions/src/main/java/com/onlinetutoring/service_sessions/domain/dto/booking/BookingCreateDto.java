@@ -18,5 +18,10 @@ public class BookingCreateDto implements Serializable {
 
     @NotNull
     private Long sessionId;
+
+    @NotNull
+    private Long studentId;
+
+
 }
 

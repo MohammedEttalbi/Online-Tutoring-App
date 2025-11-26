@@ -23,7 +23,7 @@ public class SessionUpdateDto implements Serializable {
 
     @Positive
     private Double duration;
-
+    private String tutorName;
     private Long scheduleId;
     private List<Long> materialIds;
 }

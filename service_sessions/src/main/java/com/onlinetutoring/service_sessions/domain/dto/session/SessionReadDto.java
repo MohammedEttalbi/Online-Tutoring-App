@@ -16,6 +16,7 @@ public class SessionReadDto implements Serializable {
     private String name;
     private double duration;
     private Long scheduleId;
+    private String tutorName;
     private List<Long> materialIds;
     private List<Long> bookingIds;
 }

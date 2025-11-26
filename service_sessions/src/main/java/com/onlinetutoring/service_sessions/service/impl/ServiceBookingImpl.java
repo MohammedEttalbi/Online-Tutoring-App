@@ -1,174 +1,177 @@
 package com.onlinetutoring.service_sessions.service.impl;
 
-
-import com.onlinetutoring.service_sessions.common.exception.NotFoundException;
-import com.onlinetutoring.service_sessions.domain.dto.booking.BookingCreateDto;
-import com.onlinetutoring.service_sessions.domain.dto.booking.BookingDeleteDto;
-import com.onlinetutoring.service_sessions.domain.dto.booking.BookingReadDto;
-import com.onlinetutoring.service_sessions.domain.dto.booking.BookingUpdateDto;
+import com.onlinetutoring.service_sessions.domain.dto.booking.*;
 import com.onlinetutoring.service_sessions.domain.entity.Booking;
 import com.onlinetutoring.service_sessions.domain.entity.Session;
-import com.onlinetutoring.service_sessions.mapper.BookingMapper;
 import com.onlinetutoring.service_sessions.repository.BookingRepository;
 import com.onlinetutoring.service_sessions.repository.SessionRepository;
-import com.onlinetutoring.service_sessions.service.IServiceBooking;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.onlinetutoring.service_sessions.feignrequests.ResilientFeignRequests;
+import com.onlinetutoring.service_sessions.feignrequests.StudentDto;
+import com.onlinetutoring.service_sessions.mapper.BookingMapper;
+import feign.FeignException;
+import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@Transactional
-public class ServiceBookingImpl implements IServiceBooking {
+public class ServiceBookingImpl {
 
     private final BookingRepository bookingRepository;
     private final SessionRepository sessionRepository;
     private final BookingMapper bookingMapper;
-
+    private final ResilientFeignRequests resilientFeignRequests;
 
     public ServiceBookingImpl(BookingRepository bookingRepository,
                               SessionRepository sessionRepository,
-                              BookingMapper bookingMapper) {
-
+                              BookingMapper bookingMapper,
+                              ResilientFeignRequests resilientFeignRequests) {
         this.bookingRepository = bookingRepository;
         this.sessionRepository = sessionRepository;
         this.bookingMapper = bookingMapper;
+        this.resilientFeignRequests = resilientFeignRequests;
     }
 
+    public List<BookingReadDto> listAllBookings() {
+        return bookingRepository.findAll()
+                .stream()
+                .map(bookingMapper::toReadDto)
+                .collect(Collectors.toList());
+    }
 
-    @Override
-    public BookingReadDto create(BookingCreateDto dto) {
+    public BookingReadDto getBookingById(Long id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Booking not found with id: " + id));
+        return bookingMapper.toReadDto(booking);
+    }
 
-        // Ensure session exists
-        Session session = sessionRepository.findById(dto.getSessionId())
-                .orElseThrow(() -> new NotFoundException("Session not found: id=" + dto.getSessionId()));
+    @Transactional
+    public ResponseEntity<?> createBooking(BookingCreateDto bookingCreateDto) {
 
-        // Conflict check: a booking for same session at same time
-        if (bookingRepository.existsBySession_IdAndDateTime(dto.getSessionId(), dto.getDateTime())) {
-            throw new IllegalStateException("A booking already exists for this session at the specified date/time");
+        if (bookingCreateDto == null || bookingCreateDto.getSessionId() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid booking data");
         }
 
-        Booking entity = bookingMapper.toEntity(dto);
+        try {
+            // 1. Validate Session exists
+            Session session = sessionRepository.findById(bookingCreateDto.getSessionId())
+                    .orElseThrow(() -> new RuntimeException("Session not found: " + bookingCreateDto.getSessionId()));
 
-        // Ensure association is managed entity
-        entity.setSession(session);
+            // 2. Validate Student exists via users-service
+            ResponseEntity<StudentDto> studentResponse =
+                    resilientFeignRequests.getStudentById(bookingCreateDto.getStudentId());
 
-        Booking saved = bookingRepository.save(entity);
-
-        return bookingMapper.toReadDto(saved);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public BookingReadDto getById(Long id) {
-
-        Booking b = bookingRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Booking not found: id=" + id));
-
-        return bookingMapper.toReadDto(b);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<BookingReadDto> getAll(Pageable pageable) {
-
-        return bookingRepository.findAll(pageable).map(bookingMapper::toReadDto);
-    }
-
-
-    @Override
-    public BookingReadDto update(BookingUpdateDto dto) {
-
-        Booking entity = bookingRepository.findById(dto.getId())
-                .orElseThrow(() -> new NotFoundException("Booking not found: id=" + dto.getId()));
-
-        // If session change requested, ensure session exists
-        if (dto.getSessionId() != null) {
-
-            Session session = sessionRepository.findById(dto.getSessionId())
-                    .orElseThrow(() -> new NotFoundException("Session not found: id=" + dto.getSessionId()));
-            entity.setSession(session);
-        }
-
-        // If date change (and/or session change), check conflict
-        LocalDateTime newDate = dto.getDateTime() != null ? dto.getDateTime() : entity.getDateTime();
-
-        Long newSessionId = dto.getSessionId() != null ? dto.getSessionId() : (entity.getSession() != null ? entity.getSession().getId() : null);
-
-        if (newSessionId != null) {
-
-            boolean conflict = bookingRepository.existsBySession_IdAndDateTime(newSessionId, newDate);
-
-            if (conflict && !(newDate.equals(entity.getDateTime()) && newSessionId.equals(entity.getSession().getId()))) {
-
-                throw new IllegalStateException("A booking already exists for this session at the specified date/time");
+            if (!studentResponse.getStatusCode().is2xxSuccessful()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Student not found: " + bookingCreateDto.getStudentId());
             }
+
+            StudentDto student = studentResponse.getBody();
+            if (student == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Student not found: " + bookingCreateDto.getStudentId());
+            }
+
+            // 3. Create the booking with student's full name
+            Booking booking = bookingMapper.toEntity(bookingCreateDto);
+            booking.setSession(session);
+            booking.setStudentName(student.getFirstName() + " " + student.getLastName());
+
+            Booking savedBooking = bookingRepository.save(booking);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(bookingMapper.toReadDto(savedBooking));
+
+        } catch (FeignException feignEx) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                    .body("Users service is currently unavailable");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error creating booking: " + ex.getMessage());
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<?> updateBooking(BookingUpdateDto bookingUpdateDto) {
+
+        if (bookingUpdateDto == null || bookingUpdateDto.getId() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid booking data");
         }
 
-        bookingMapper.update(dto, entity);
-        Booking saved = bookingRepository.save(entity);
+        try {
+            Booking existingBooking = bookingRepository.findById(bookingUpdateDto.getId())
+                    .orElseThrow(() -> new RuntimeException("Booking not found: " + bookingUpdateDto.getId()));
 
-        return bookingMapper.toReadDto(saved);
+            // Validate and update student if studentId is provided
+            if (bookingUpdateDto.getStudentId() != null) {
+                ResponseEntity<StudentDto> studentResponse =
+                        resilientFeignRequests.getStudentById(bookingUpdateDto.getStudentId());
+
+                if (!studentResponse.getStatusCode().is2xxSuccessful() || studentResponse.getBody() == null) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                            .body("Student not found: " + bookingUpdateDto.getStudentId());
+                }
+
+                StudentDto student = studentResponse.getBody();
+                existingBooking.setStudentName(student.getFirstName() + " " + student.getLastName());
+            }
+
+            // Use mapper to update other fields (dateTime, sessionId)
+            bookingMapper.update(bookingUpdateDto, existingBooking);
+
+            Booking updatedBooking = bookingRepository.save(existingBooking);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(bookingMapper.toReadDto(updatedBooking));
+
+        } catch (FeignException feignEx) {
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+                    .body("Users service is currently unavailable");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating booking: " + ex.getMessage());
+        }
     }
 
+    @Transactional
+    public ResponseEntity<?> deleteBooking(BookingDeleteDto bookingDeleteDto) {
 
-    @Override
-    public void delete(BookingDeleteDto dto) {
+        if (bookingDeleteDto == null || bookingDeleteDto.getId() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Invalid booking ID");
+        }
 
-        Booking entity = bookingRepository.findById(dto.getId())
-                .orElseThrow(() -> new NotFoundException("Booking not found: id=" + dto.getId()));
+        try {
+            Booking booking = bookingRepository.findById(bookingDeleteDto.getId())
+                    .orElseThrow(() -> new RuntimeException("Booking not found: " + bookingDeleteDto.getId()));
 
-        bookingRepository.delete(entity);
+            bookingRepository.delete(booking);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Booking deleted successfully");
+
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error deleting booking: " + ex.getMessage());
+        }
     }
 
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<BookingReadDto> listBySession(Long sessionId, Pageable pageable) {
-
-        return bookingRepository.findAllBySession_Id(sessionId, pageable).map(bookingMapper::toReadDto);
+    public List<BookingReadDto> getBookingsBySessionId(Long sessionId) {
+        return bookingRepository.findBySessionId(sessionId)
+                .stream()
+                .map(bookingMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countBySession(Long sessionId) {
-        return bookingRepository.countBySession_Id(sessionId);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public Page<BookingReadDto> listByDateRange(LocalDateTime start, LocalDateTime end, Pageable pageable) {
-
-        return bookingRepository.findAllByDateTimeBetween(start, end, pageable).map(bookingMapper::toReadDto);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public long countBySessionInRange(Long sessionId, LocalDateTime start, LocalDateTime end) {
-
-        return bookingRepository.countBySession_IdAndDateTimeBetween(sessionId, start, end);
-    }
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean existsAtDateTime(Long sessionId, LocalDateTime dateTime) {
-
-        return bookingRepository.existsBySession_IdAndDateTime(sessionId, dateTime);
-    }
-
-
-    @Override
-    public void deleteBySession(Long sessionId) {
-        bookingRepository.deleteAllBySession_Id(sessionId);
+    public List<BookingReadDto> getBookingsByStudentName(String studentName) {
+        return bookingRepository.findByStudentName(studentName)
+                .stream()
+                .map(bookingMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 }
-

@@ -1,6 +1,7 @@
 package com.onlinetutoring.usersservice.domain.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;
@@ -9,8 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
+@DiscriminatorValue("student")
 public class Student extends User {
     @Column(length = 60)
     private String level;

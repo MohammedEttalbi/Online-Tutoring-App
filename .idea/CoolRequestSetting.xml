@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CoolRequestSetting">
+    <option name="serializePaths">
+      <list>
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\d6c8531ff9e74aa3a92038e2e959db5a" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\ac619c4de7da41bca86caec313331fd0" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\f183388f8de04e2182ae28a443c33c24" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\0f1d9924ebcf44b28286321c09e8f25d" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\519d7566234940018ad962d94f52c662" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\76dcbe40294e4746966db70f412b6d8f" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\8a4e50a8a4e04a35a51ea2bf72e71828" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\fe830663d6454c2ead342ef0c3afb1ae" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\ff432ab518b240b2b419daaef5ab87b0" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\f873bf57e07c4a1094ab87f68a0a338f" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\2d02184196844304abd9508af8f947a0" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\007720afc48b41bfb64f9955625a4eca" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\6ea604a13414466da1c87f98760fa19e" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\f5716c6490be4e649fa146a655817bdd" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\9e451130f06f41629886f9c8fa361490" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\aeb6089412e74866ae38dc45bf9a3738" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\fe0fca4019be499c9ed26263b77bd363" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\5270d67cddc1456eb115b6cba367000d" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\47b6ebedd40b4021ac9792c03cac4361" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\a570597cabc140ae8dc1eb1eeec76a88" />
+        <option value="C:\Users\user\.config\.cool-request\request\serialize\d85f62b85dff49349aaf0cc887bfaff7" />
+      </list>
+    </option>
     <option name="projectCachePath" value="project-30b98aa5-891a-4742-ac21-fbc5581016dc" />
   </component>
 </project>

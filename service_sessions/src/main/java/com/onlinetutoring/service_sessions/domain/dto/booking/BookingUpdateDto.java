@@ -19,5 +19,7 @@ public class BookingUpdateDto implements Serializable {
     private LocalDateTime dateTime;
 
     private Long sessionId;
+
+    private Long studentId;
 }
 

@@ -1,8 +1,9 @@
 CREATE TABLE booking
 (
-    id         BIGINT AUTO_INCREMENT NOT NULL,
-    date_time  datetime              NOT NULL,
-    session_id BIGINT                NOT NULL,
+    id           BIGINT AUTO_INCREMENT NOT NULL,
+    date_time    datetime              NOT NULL,
+    student_name VARCHAR(255)          NOT NULL,
+    session_id   BIGINT                NOT NULL,
     CONSTRAINT pk_booking PRIMARY KEY (id)
 );
 
@@ -26,6 +27,7 @@ CREATE TABLE session
     id          BIGINT AUTO_INCREMENT NOT NULL,
     name        VARCHAR(50)           NOT NULL,
     duration    DOUBLE                NOT NULL,
+    tutor_name  VARCHAR(255)          NOT NULL,
     schedule_id BIGINT                NOT NULL,
     CONSTRAINT pk_session PRIMARY KEY (id)
 );

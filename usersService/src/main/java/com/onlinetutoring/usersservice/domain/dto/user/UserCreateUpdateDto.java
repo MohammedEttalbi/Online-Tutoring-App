@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * DTO for {@link com.onlinetutoring.usersservice.domain.entity.User}
  */
-@Value
+
 @Getter
 @Setter
 @AllArgsConstructor

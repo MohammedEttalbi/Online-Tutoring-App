@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE",length = 4)
+@DiscriminatorColumn(name = "TYPE",discriminatorType = DiscriminatorType.STRING,length =20)
 public class User {
 
     @Id

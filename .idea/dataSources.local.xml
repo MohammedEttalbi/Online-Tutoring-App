@@ -5,6 +5,7 @@
       <database-info product="MySQL" version="5.5.5-10.4.32-MariaDB" jdbc-version="4.2" driver-name="Amazon Web Services (AWS) Advanced JDBC Wrapper" driver-version="Amazon Web Services (AWS) Advanced JDBC Wrapper 2.3.7 ( Revision: 7591851e8da4e1c705ba232a8bd07824a5cfd276 )" dbms="MARIADB" exact-version="10.4.32" exact-driver-version="2.3">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
+        <jdbc-catalog-is-schema>true</jdbc-catalog-is-schema>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
@@ -14,6 +15,7 @@
           <node kind="schema">
             <name qname="sessionsservicedb" />
             <name qname="@" />
+            <name qname="usersservicedb" />
           </node>
         </introspection-scope>
       </schema-mapping>

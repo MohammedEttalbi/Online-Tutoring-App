@@ -19,6 +19,7 @@ public interface BookingMapper {
             s.setId(dto.getSessionId());
             b.setSession(s);
         }
+        // Note: studentName will be set in the service after validating student
         return b;
     }
 
@@ -27,6 +28,7 @@ public interface BookingMapper {
         BookingReadDto dto = new BookingReadDto();
         dto.setId(entity.getId());
         dto.setDateTime(entity.getDateTime());
+        dto.setStudentName(entity.getStudentName());
         dto.setSessionId(entity.getSession() != null ? entity.getSession().getId() : null);
         return dto;
     }
@@ -34,12 +36,14 @@ public interface BookingMapper {
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     default void update(BookingUpdateDto dto, @MappingTarget Booking entity) {
         if (dto == null || entity == null) return;
-        if (dto.getDateTime() != null) entity.setDateTime(dto.getDateTime());
+        if (dto.getDateTime() != null) {
+            entity.setDateTime(dto.getDateTime());
+        }
         if (dto.getSessionId() != null) {
             Session s = new Session();
             s.setId(dto.getSessionId());
             entity.setSession(s);
         }
+        // Note: studentId validation and name update will be handled in the service
     }
 }
-

@@ -20,6 +20,9 @@ public class Booking {
     @Column(nullable = false)
     private LocalDateTime dateTime;
 
+    @Column(nullable = false)
+    private String studentName;
+
     // Booking → Session (Many-to-One)
     @ManyToOne(optional = false)
     @JoinColumn(name = "session_id", nullable = false)

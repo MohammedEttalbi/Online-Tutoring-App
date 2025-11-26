@@ -14,6 +14,7 @@ public class SessionCreateDto implements Serializable {
     public String name;
     @Positive
     public double duration;
+    public String tutorName;
 
     // Optional linkage by ids; owner side requires schedule id
     public Long scheduleId;
