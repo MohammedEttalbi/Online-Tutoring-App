@@ -7,7 +7,13 @@
         <option value="$PROJECT_DIR$/usersService/pom.xml" />
         <option value="$PROJECT_DIR$/discoveryservice/pom.xml" />
         <option value="$PROJECT_DIR$/evaluationService/pom.xml" />
+        <option value="$PROJECT_DIR$/evaluation-service/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/evaluationService/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="openjdk-25" project-jdk-type="JavaSDK">
