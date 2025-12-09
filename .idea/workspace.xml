@@ -6,19 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="583f5232-3f86-4595-b417-64edb2b9fda2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GatewayService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/GatewayService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/controller/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/booking/BookingReadDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/booking/BookingReadDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionCreateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionCreateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionReadDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionReadDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/dto/session/SessionUpdateDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/entity/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/entity/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/entity/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/domain/entity/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/mapper/BookingMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/mapper/BookingMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/mapper/SessionMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/mapper/SessionMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/repository/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/repository/BookingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/service/impl/ServiceBookingImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/java/com/onlinetutoring/service_sessions/service/impl/ServiceBookingImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ConfigServer/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ConfigServer/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluation-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation-service/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service_sessions/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/service_sessions/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/usersService/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,7 +224,7 @@
       <workItem from="1764003014242" duration="55605000" />
       <workItem from="1764514978171" duration="838000" />
       <workItem from="1765289999625" duration="5347000" />
-      <workItem from="1765296618885" duration="1904000" />
+      <workItem from="1765296618885" duration="3330000" />
     </task>
     <servers />
   </component>
