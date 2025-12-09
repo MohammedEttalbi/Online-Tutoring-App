@@ -26,9 +26,9 @@ public class ServiceBookingImpl {
     private final ResilientFeignRequests resilientFeignRequests;
 
     public ServiceBookingImpl(BookingRepository bookingRepository,
-                              SessionRepository sessionRepository,
-                              BookingMapper bookingMapper,
-                              ResilientFeignRequests resilientFeignRequests) {
+            SessionRepository sessionRepository,
+            BookingMapper bookingMapper,
+            ResilientFeignRequests resilientFeignRequests) {
         this.bookingRepository = bookingRepository;
         this.sessionRepository = sessionRepository;
         this.bookingMapper = bookingMapper;
@@ -62,8 +62,8 @@ public class ServiceBookingImpl {
                     .orElseThrow(() -> new RuntimeException("Session not found: " + bookingCreateDto.getSessionId()));
 
             // 2. Validate Student exists via users-service
-            ResponseEntity<StudentDto> studentResponse =
-                    resilientFeignRequests.getStudentById(bookingCreateDto.getStudentId());
+            ResponseEntity<StudentDto> studentResponse = resilientFeignRequests
+                    .getStudentById(bookingCreateDto.getStudentId());
 
             if (!studentResponse.getStatusCode().is2xxSuccessful()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -79,7 +79,7 @@ public class ServiceBookingImpl {
             // 3. Create the booking with student's full name
             Booking booking = bookingMapper.toEntity(bookingCreateDto);
             booking.setSession(session);
-            booking.setStudentName(student.getFirstName() + " " + student.getLastName());
+            booking.setStudentId(bookingCreateDto.getStudentId());
 
             Booking savedBooking = bookingRepository.save(booking);
 
@@ -109,8 +109,8 @@ public class ServiceBookingImpl {
 
             // Validate and update student if studentId is provided
             if (bookingUpdateDto.getStudentId() != null) {
-                ResponseEntity<StudentDto> studentResponse =
-                        resilientFeignRequests.getStudentById(bookingUpdateDto.getStudentId());
+                ResponseEntity<StudentDto> studentResponse = resilientFeignRequests
+                        .getStudentById(bookingUpdateDto.getStudentId());
 
                 if (!studentResponse.getStatusCode().is2xxSuccessful() || studentResponse.getBody() == null) {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -118,7 +118,7 @@ public class ServiceBookingImpl {
                 }
 
                 StudentDto student = studentResponse.getBody();
-                existingBooking.setStudentName(student.getFirstName() + " " + student.getLastName());
+                existingBooking.setStudentId(bookingUpdateDto.getStudentId());
             }
 
             // Use mapper to update other fields (dateTime, sessionId)
@@ -168,8 +168,8 @@ public class ServiceBookingImpl {
                 .collect(Collectors.toList());
     }
 
-    public List<BookingReadDto> getBookingsByStudentName(String studentName) {
-        return bookingRepository.findByStudentName(studentName)
+    public List<BookingReadDto> getBookingsByStudentId(Long studentId) {
+        return bookingRepository.findByStudentId(studentId)
                 .stream()
                 .map(bookingMapper::toReadDto)
                 .collect(Collectors.toList());

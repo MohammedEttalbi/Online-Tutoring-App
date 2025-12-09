@@ -18,10 +18,12 @@ import java.util.stream.Collectors;
 public interface SessionMapper {
 
     default Session toEntity(SessionCreateDto dto) {
-        if (dto == null) return null;
+        if (dto == null)
+            return null;
         Session s = new Session();
         s.setName(dto.name);
         s.setDuration(dto.duration);
+        s.setTutorId(dto.tutorId);
         if (dto.scheduleId != null) {
             Schedule sch = new Schedule();
             sch.setId(dto.scheduleId);
@@ -34,12 +36,14 @@ public interface SessionMapper {
     }
 
     default SessionReadDto toReadDto(Session entity) {
-        if (entity == null) return null;
+        if (entity == null)
+            return null;
         SessionReadDto dto = new SessionReadDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDuration(entity.getDuration());
         dto.setScheduleId(entity.getSchedule() != null ? entity.getSchedule().getId() : null);
+        dto.setTutorId(entity.getTutorId());
         dto.setMaterialIds(toIds(entity.getMaterials()));
         dto.setBookingIds(toBookingIds(entity.getBookings()));
         return dto;
@@ -47,9 +51,14 @@ public interface SessionMapper {
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     default void update(SessionUpdateDto dto, @MappingTarget Session entity) {
-        if (dto == null || entity == null) return;
-        if (dto.getName() != null) entity.setName(dto.getName());
-        if (dto.getDuration() != null) entity.setDuration(dto.getDuration());
+        if (dto == null || entity == null)
+            return;
+        if (dto.getName() != null)
+            entity.setName(dto.getName());
+        if (dto.getDuration() != null)
+            entity.setDuration(dto.getDuration());
+        if (dto.getTutorId() != null)
+            entity.setTutorId(dto.getTutorId());
         if (dto.getScheduleId() != null) {
             Schedule sch = new Schedule();
             sch.setId(dto.getScheduleId());
@@ -62,36 +71,41 @@ public interface SessionMapper {
 
     // Helpers for id<->entity mapping
     default Schedule map(Long id) {
-        if (id == null) return null;
+        if (id == null)
+            return null;
         Schedule s = new Schedule();
         s.setId(id);
         return s;
     }
 
     default Material mapMaterial(Long id) {
-        if (id == null) return null;
+        if (id == null)
+            return null;
         Material m = new Material();
         m.setId(id);
         return m;
     }
 
     default List<Material> mapMaterialIds(List<Long> ids) {
-        if (ids == null) return null;
+        if (ids == null)
+            return null;
         List<Material> list = new ArrayList<>();
         for (Long id : ids) {
-            if (id != null) list.add(mapMaterial(id));
+            if (id != null)
+                list.add(mapMaterial(id));
         }
         return list;
     }
 
     default List<Long> toIds(List<Material> materials) {
-        if (materials == null) return null;
+        if (materials == null)
+            return null;
         return materials.stream().filter(Objects::nonNull).map(Material::getId).collect(Collectors.toList());
     }
 
     default List<Long> toBookingIds(List<Booking> bookings) {
-        if (bookings == null) return null;
+        if (bookings == null)
+            return null;
         return bookings.stream().filter(Objects::nonNull).map(Booking::getId).collect(Collectors.toList());
     }
 }
-

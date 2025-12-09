@@ -1,6 +1,5 @@
 package com.onlinetutoring.service_sessions.controller;
 
-
 import com.onlinetutoring.service_sessions.domain.dto.booking.BookingCreateDto;
 import com.onlinetutoring.service_sessions.domain.dto.booking.BookingDeleteDto;
 import com.onlinetutoring.service_sessions.domain.dto.booking.BookingReadDto;
@@ -53,12 +52,12 @@ public class BookingController {
     }
 
     /**
-     * Get bookings by student name
-     * GET /api/bookings/student?name={studentName}
+     * Get bookings by student ID
+     * GET /api/bookings/student/{studentId}
      */
-    @GetMapping("/student")
-    public ResponseEntity<List<BookingReadDto>> getBookingsByStudentName(@RequestParam String name) {
-        List<BookingReadDto> bookings = serviceBookingImpl.getBookingsByStudentName(name);
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<List<BookingReadDto>> getBookingsByStudentId(@PathVariable Long studentId) {
+        List<BookingReadDto> bookings = serviceBookingImpl.getBookingsByStudentId(studentId);
         return ResponseEntity.ok(bookings);
     }
 

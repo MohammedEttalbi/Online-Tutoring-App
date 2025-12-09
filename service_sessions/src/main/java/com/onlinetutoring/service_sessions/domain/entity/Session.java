@@ -25,15 +25,11 @@ public class Session {
     private double duration;
 
     @Column(nullable = false)
-    private String tutorName;
+    private Long tutorId;
 
     // Session ↔ Material (Many-to-Many)
     @ManyToMany
-    @JoinTable(
-            name = "session_materials",
-            joinColumns = @JoinColumn(name = "session_id"),
-            inverseJoinColumns = @JoinColumn(name = "material_id")
-    )
+    @JoinTable(name = "session_materials", joinColumns = @JoinColumn(name = "session_id"), inverseJoinColumns = @JoinColumn(name = "material_id"))
     private List<Material> materials = new ArrayList<>();
 
     // Session → Booking (One-to-Many)
@@ -45,4 +41,3 @@ public class Session {
     @JoinColumn(name = "schedule_id", nullable = false, unique = true)
     private Schedule schedule;
 }
-

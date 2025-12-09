@@ -11,7 +11,8 @@ import org.mapstruct.*;
 public interface BookingMapper {
 
     default Booking toEntity(BookingCreateDto dto) {
-        if (dto == null) return null;
+        if (dto == null)
+            return null;
         Booking b = new Booking();
         b.setDateTime(dto.getDateTime());
         if (dto.getSessionId() != null) {
@@ -24,18 +25,20 @@ public interface BookingMapper {
     }
 
     default BookingReadDto toReadDto(Booking entity) {
-        if (entity == null) return null;
+        if (entity == null)
+            return null;
         BookingReadDto dto = new BookingReadDto();
         dto.setId(entity.getId());
         dto.setDateTime(entity.getDateTime());
-        dto.setStudentName(entity.getStudentName());
+        dto.setStudentId(entity.getStudentId());
         dto.setSessionId(entity.getSession() != null ? entity.getSession().getId() : null);
         return dto;
     }
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     default void update(BookingUpdateDto dto, @MappingTarget Booking entity) {
-        if (dto == null || entity == null) return;
+        if (dto == null || entity == null)
+            return;
         if (dto.getDateTime() != null) {
             entity.setDateTime(dto.getDateTime());
         }

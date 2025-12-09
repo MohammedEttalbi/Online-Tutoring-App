@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +15,5 @@ public class BookingReadDto implements Serializable {
     private Long id;
     private LocalDateTime dateTime;
     private Long sessionId;
-    private String studentName;
+    private Long studentId;
 }
-

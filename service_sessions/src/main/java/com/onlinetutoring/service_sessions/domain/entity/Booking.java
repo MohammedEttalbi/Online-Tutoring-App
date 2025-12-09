@@ -21,11 +21,10 @@ public class Booking {
     private LocalDateTime dateTime;
 
     @Column(nullable = false)
-    private String studentName;
+    private Long studentId;
 
     // Booking → Session (Many-to-One)
     @ManyToOne(optional = false)
     @JoinColumn(name = "session_id", nullable = false)
     private Session session;
 }
-
