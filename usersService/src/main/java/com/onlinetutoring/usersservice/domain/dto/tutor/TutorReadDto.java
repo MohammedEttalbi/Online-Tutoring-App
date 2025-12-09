@@ -1,9 +1,11 @@
 package com.onlinetutoring.usersservice.domain.dto.tutor;
 
+import com.onlinetutoring.usersservice.domain.dto.qualification.QualificationReadDto;
 import com.onlinetutoring.usersservice.domain.enums.Role;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * DTO for {@link com.onlinetutoring.usersservice.domain.entity.Tutor}
@@ -20,4 +22,6 @@ public class TutorReadDto implements Serializable {
     String email;
     Role role;
     String bio;
+    Set<QualificationReadDto> qualifications;
+
 }
