@@ -8,7 +8,8 @@ import org.mapstruct.*;
 
 import java.util.Set;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING, uses = {
+        SubjectMapper.class })
 public interface UserMapper {
     User toEntity(UserCreateUpdateDto userCreateUpdateDto);
 
