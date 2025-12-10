@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="583f5232-3f86-4595-b417-64edb2b9fda2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CoolRequestSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CoolRequestSetting.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/evaluation-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/evaluation-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/folderServerConfig/evaluation-service.properties" beforeDir="false" afterPath="$PROJECT_DIR$/folderServerConfig/evaluation-service.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/folderServerConfig/service-sessions.properties" beforeDir="false" afterPath="$PROJECT_DIR$/folderServerConfig/service-sessions.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/folderServerConfig/usersService.properties" beforeDir="false" afterPath="$PROJECT_DIR$/folderServerConfig/usersService.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/service-sessions/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-sessions/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usersService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/usersService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersService/src/main/java/com/onlinetutoring/usersservice/service/Impl/ServiceStudentImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/usersService/src/main/java/com/onlinetutoring/usersservice/service/Impl/ServiceStudentImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usersService/src/main/java/com/onlinetutoring/usersservice/service/Impl/ServiceTutorImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/usersService/src/main/java/com/onlinetutoring/usersservice/service/Impl/ServiceTutorImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +262,7 @@
       <workItem from="1764003014242" duration="55605000" />
       <workItem from="1764514978171" duration="838000" />
       <workItem from="1765289999625" duration="5347000" />
-      <workItem from="1765296618885" duration="18071000" />
+      <workItem from="1765296618885" duration="21104000" />
     </task>
     <servers />
   </component>

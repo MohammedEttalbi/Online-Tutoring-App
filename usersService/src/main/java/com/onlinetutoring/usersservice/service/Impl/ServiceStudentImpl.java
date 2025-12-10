@@ -1,6 +1,7 @@
 package com.onlinetutoring.usersservice.service.Impl;
 
 import com.onlinetutoring.usersservice.domain.entity.Student;
+import com.onlinetutoring.usersservice.kafka.KafkaProducerService;
 import com.onlinetutoring.usersservice.repository.StudentRepository;
 import com.onlinetutoring.usersservice.service.IServiceStudent;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,10 +17,15 @@ import java.util.List;
 public class ServiceStudentImpl implements IServiceStudent {
 
     private final StudentRepository studentRepository;
+    private final KafkaProducerService kafkaProducerService;
 
     @Override
     public Student createStudent(Student student) {
-        return studentRepository.save(student);
+        Student saved = studentRepository.save(student);
+        // Publish Kafka event
+        kafkaProducerService.publishStudentCreated(
+                saved.getId(), saved.getFirstName(), saved.getLastName(), saved.getEmail());
+        return saved;
     }
 
     @Override
@@ -50,7 +56,9 @@ public class ServiceStudentImpl implements IServiceStudent {
         existing.setLevel(student.getLevel());
         existing.setRole(student.getRole());
 
-
+        // Publish Kafka event
+        kafkaProducerService.publishStudentUpdated(
+                existing.getId(), existing.getFirstName(), existing.getLastName(), existing.getEmail());
 
         return existing;
     }
@@ -61,5 +69,7 @@ public class ServiceStudentImpl implements IServiceStudent {
             throw new EntityNotFoundException("Student not found: " + id);
         }
         studentRepository.deleteById(id);
+        // Publish Kafka event
+        kafkaProducerService.publishStudentDeleted(id);
     }
 }
