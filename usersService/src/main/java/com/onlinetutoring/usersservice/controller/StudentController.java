@@ -3,7 +3,7 @@ package com.onlinetutoring.usersservice.controller;
 import com.onlinetutoring.usersservice.domain.dto.student.StudentCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.student.StudentReadDto;
 import com.onlinetutoring.usersservice.mapper.StudentMapper;
-import com.onlinetutoring.usersservice.service.Impl.ServiceStudentImpl;
+import com.onlinetutoring.usersservice.service.impl.ServiceStudentImpl;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,16 +40,14 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentReadDto> createStudent(@Valid @RequestBody StudentCreateUpdateDto dto) {
         return ResponseEntity.ok(
-                studentMapper.toReadDto(serviceStudent.createStudent(studentMapper.toEntity(dto)))
-        );
+                studentMapper.toReadDto(serviceStudent.createStudent(studentMapper.toEntity(dto))));
     }
 
     // ----------------- UPDATE -----------------
     @PutMapping("/{id}")
     public ResponseEntity<StudentReadDto> updateStudent(
             @PathVariable Long id,
-            @Valid @RequestBody StudentCreateUpdateDto dto
-    ) {
+            @Valid @RequestBody StudentCreateUpdateDto dto) {
         var existingStudent = serviceStudent.getStudentById(id);
         var updatedStudent = studentMapper.partialUpdate(dto, existingStudent);
         return ResponseEntity.ok(studentMapper.toReadDto(serviceStudent.updateStudent(updatedStudent)));

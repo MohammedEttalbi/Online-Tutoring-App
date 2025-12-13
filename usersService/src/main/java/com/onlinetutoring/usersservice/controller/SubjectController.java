@@ -3,7 +3,7 @@ package com.onlinetutoring.usersservice.controller;
 import com.onlinetutoring.usersservice.domain.dto.subject.SubjectCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.subject.SubjectReadDto;
 import com.onlinetutoring.usersservice.mapper.SubjectMapper;
-import com.onlinetutoring.usersservice.service.Impl.ServiceSubjectImpl;
+import com.onlinetutoring.usersservice.service.impl.ServiceSubjectImpl;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,16 +40,14 @@ public class SubjectController {
     @PostMapping
     public ResponseEntity<SubjectReadDto> createSubject(@Valid @RequestBody SubjectCreateUpdateDto dto) {
         return ResponseEntity.ok(
-                subjectMapper.toReadDto(serviceSubject.createSubject(subjectMapper.toEntity(dto)))
-        );
+                subjectMapper.toReadDto(serviceSubject.createSubject(subjectMapper.toEntity(dto))));
     }
 
     // ----------------- UPDATE -----------------
     @PutMapping("/{id}")
     public ResponseEntity<SubjectReadDto> updateSubject(
             @PathVariable Long id,
-            @Valid @RequestBody SubjectCreateUpdateDto dto
-    ) {
+            @Valid @RequestBody SubjectCreateUpdateDto dto) {
         var existingSubject = serviceSubject.getSubjectById(id);
         var updatedSubject = subjectMapper.partialUpdate(dto, existingSubject);
         return ResponseEntity.ok(subjectMapper.toReadDto(serviceSubject.updateSubject(updatedSubject)));

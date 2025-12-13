@@ -1,4 +1,4 @@
-package com.onlinetutoring.usersservice.service.Impl;
+package com.onlinetutoring.usersservice.service.impl;
 
 import com.onlinetutoring.usersservice.domain.entity.Subject;
 import com.onlinetutoring.usersservice.repository.SubjectRepository;
@@ -46,9 +46,6 @@ public class ServiceSubjectImpl implements IServiceSubject {
 
         existing.setName(subject.getName());
         existing.setDescription(subject.getDescription());
-
-
-
 
         return existing;
     }

@@ -1,10 +1,7 @@
 package com.onlinetutoring.usersservice.domain.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;

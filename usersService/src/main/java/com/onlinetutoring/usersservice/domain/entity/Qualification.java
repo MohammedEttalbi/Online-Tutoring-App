@@ -1,8 +1,6 @@
 package com.onlinetutoring.usersservice.domain.entity;
 
 import jakarta.persistence.*;
-
-import jakarta.persistence.Table;
 import lombok.*;
 
 @Data
@@ -12,10 +10,9 @@ import lombok.*;
 @Getter
 @Setter
 
-
-
 public class Qualification {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
 

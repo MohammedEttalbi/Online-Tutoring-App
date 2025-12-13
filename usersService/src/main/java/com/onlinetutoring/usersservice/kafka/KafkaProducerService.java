@@ -18,6 +18,8 @@ import java.util.concurrent.CompletableFuture;
 public class KafkaProducerService {
 
     private static final String TOPIC = "user-events";
+    private static final String USER_TYPE_STUDENT = "STUDENT";
+    private static final String USER_TYPE_TUTOR = "TUTOR";
 
     private final KafkaTemplate<String, UserEventDto> kafkaTemplate;
 
@@ -57,41 +59,41 @@ public class KafkaProducerService {
      * Publish student created event
      */
     public void publishStudentCreated(Long studentId, String firstName, String lastName, String email) {
-        publishUserEvent(studentId, "STUDENT", "CREATED", firstName, lastName, email);
+        publishUserEvent(studentId, USER_TYPE_STUDENT, "CREATED", firstName, lastName, email);
     }
 
     /**
      * Publish student updated event
      */
     public void publishStudentUpdated(Long studentId, String firstName, String lastName, String email) {
-        publishUserEvent(studentId, "STUDENT", "UPDATED", firstName, lastName, email);
+        publishUserEvent(studentId, USER_TYPE_STUDENT, "UPDATED", firstName, lastName, email);
     }
 
     /**
      * Publish student deleted event
      */
     public void publishStudentDeleted(Long studentId) {
-        publishUserEvent(studentId, "STUDENT", "DELETED", null, null, null);
+        publishUserEvent(studentId, USER_TYPE_STUDENT, "DELETED", null, null, null);
     }
 
     /**
      * Publish tutor created event
      */
     public void publishTutorCreated(Long tutorId, String firstName, String lastName, String email) {
-        publishUserEvent(tutorId, "TUTOR", "CREATED", firstName, lastName, email);
+        publishUserEvent(tutorId, USER_TYPE_TUTOR, "CREATED", firstName, lastName, email);
     }
 
     /**
      * Publish tutor updated event
      */
     public void publishTutorUpdated(Long tutorId, String firstName, String lastName, String email) {
-        publishUserEvent(tutorId, "TUTOR", "UPDATED", firstName, lastName, email);
+        publishUserEvent(tutorId, USER_TYPE_TUTOR, "UPDATED", firstName, lastName, email);
     }
 
     /**
      * Publish tutor deleted event
      */
     public void publishTutorDeleted(Long tutorId) {
-        publishUserEvent(tutorId, "TUTOR", "DELETED", null, null, null);
+        publishUserEvent(tutorId, USER_TYPE_TUTOR, "DELETED", null, null, null);
     }
 }

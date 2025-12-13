@@ -3,7 +3,7 @@ package com.onlinetutoring.usersservice.controller;
 import com.onlinetutoring.usersservice.domain.dto.qualification.QualificationCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.qualification.QualificationReadDto;
 import com.onlinetutoring.usersservice.mapper.QualificationMapper;
-import com.onlinetutoring.usersservice.service.Impl.ServiceQualificationImpl;
+import com.onlinetutoring.usersservice.service.impl.ServiceQualificationImpl;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,21 +38,22 @@ public class QualificationController {
 
     // ----------------- CREATE -----------------
     @PostMapping
-    public ResponseEntity<QualificationReadDto> createQualification(@Valid @RequestBody QualificationCreateUpdateDto dto) {
+    public ResponseEntity<QualificationReadDto> createQualification(
+            @Valid @RequestBody QualificationCreateUpdateDto dto) {
         return ResponseEntity.ok(
-                qualificationMapper.toReadDto(serviceQualification.createQualification(qualificationMapper.toEntity(dto)))
-        );
+                qualificationMapper
+                        .toReadDto(serviceQualification.createQualification(qualificationMapper.toEntity(dto))));
     }
 
     // ----------------- UPDATE -----------------
     @PutMapping("/{id}")
     public ResponseEntity<QualificationReadDto> updateQualification(
             @PathVariable Long id,
-            @Valid @RequestBody QualificationCreateUpdateDto dto
-    ) {
+            @Valid @RequestBody QualificationCreateUpdateDto dto) {
         var existingQualification = serviceQualification.getQualificationById(id);
         var updatedQualification = qualificationMapper.partialUpdate(dto, existingQualification);
-        return ResponseEntity.ok(qualificationMapper.toReadDto(serviceQualification.updateQualification(updatedQualification)));
+        return ResponseEntity
+                .ok(qualificationMapper.toReadDto(serviceQualification.updateQualification(updatedQualification)));
     }
 
     // ----------------- DELETE -----------------

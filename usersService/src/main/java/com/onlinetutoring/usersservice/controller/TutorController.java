@@ -3,7 +3,7 @@ package com.onlinetutoring.usersservice.controller;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorReadDto;
 import com.onlinetutoring.usersservice.mapper.TutorMapper;
-import com.onlinetutoring.usersservice.service.Impl.ServiceTutorImpl;
+import com.onlinetutoring.usersservice.service.impl.ServiceTutorImpl;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,16 +40,14 @@ public class TutorController {
     @PostMapping
     public ResponseEntity<TutorReadDto> createTutor(@Valid @RequestBody TutorCreateUpdateDto dto) {
         return ResponseEntity.ok(
-                tutorMapper.toReadDto(serviceTutor.createTutor(tutorMapper.toEntity(dto)))
-        );
+                tutorMapper.toReadDto(serviceTutor.createTutor(tutorMapper.toEntity(dto))));
     }
 
     // ----------------- UPDATE -----------------
     @PutMapping("/{id}")
     public ResponseEntity<TutorReadDto> updateTutor(
             @PathVariable Long id,
-            @Valid @RequestBody TutorCreateUpdateDto dto
-    ) {
+            @Valid @RequestBody TutorCreateUpdateDto dto) {
         var existingTutor = serviceTutor.getTutorById(id);
         var updatedTutor = tutorMapper.partialUpdate(dto, existingTutor);
         return ResponseEntity.ok(tutorMapper.toReadDto(serviceTutor.updateTutor(updatedTutor)));

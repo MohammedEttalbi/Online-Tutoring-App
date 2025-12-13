@@ -2,7 +2,6 @@ package com.onlinetutoring.usersservice.mapper;
 
 import com.onlinetutoring.usersservice.domain.dto.qualification.QualificationCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.qualification.QualificationReadDto;
-import com.onlinetutoring.usersservice.domain.dto.student.StudentReadDto;
 import com.onlinetutoring.usersservice.domain.entity.Qualification;
 import org.mapstruct.*;
 
@@ -17,5 +16,6 @@ public interface QualificationMapper {
     Set<QualificationReadDto> toReadDtoSet(Set<Qualification> qualifications);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Qualification partialUpdate(QualificationCreateUpdateDto qualificationCreateUpdateDto, @MappingTarget Qualification qualification);
+    Qualification partialUpdate(QualificationCreateUpdateDto qualificationCreateUpdateDto,
+            @MappingTarget Qualification qualification);
 }

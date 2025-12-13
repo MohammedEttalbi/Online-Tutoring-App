@@ -1,4 +1,4 @@
-package com.onlinetutoring.usersservice.service.Impl;
+package com.onlinetutoring.usersservice.service.impl;
 
 import com.onlinetutoring.usersservice.domain.entity.Tutor;
 import com.onlinetutoring.usersservice.kafka.KafkaProducerService;

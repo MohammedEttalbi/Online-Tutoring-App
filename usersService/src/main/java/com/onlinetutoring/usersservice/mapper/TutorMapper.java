@@ -1,6 +1,5 @@
 package com.onlinetutoring.usersservice.mapper;
 
-import com.onlinetutoring.usersservice.domain.dto.student.StudentReadDto;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorCreateUpdateDto;
 import com.onlinetutoring.usersservice.domain.dto.tutor.TutorReadDto;
 import com.onlinetutoring.usersservice.domain.entity.Tutor;

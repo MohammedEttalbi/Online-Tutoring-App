@@ -16,11 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 
 public class StudentReadDto implements Serializable {
-    Long id;
-    String firstName;
-    String lastName;
-    String email;
-    Role role;
-    String level;
-    Set<SubjectReadDto> subjects;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private Role role;
+    private String level;
+    private Set<SubjectReadDto> subjects;
 }

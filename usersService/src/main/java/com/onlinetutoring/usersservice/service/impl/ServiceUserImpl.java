@@ -1,7 +1,4 @@
-package com.onlinetutoring.usersservice.service.Impl;
-
-
-
+package com.onlinetutoring.usersservice.service.impl;
 
 import com.onlinetutoring.usersservice.domain.entity.Subject;
 import com.onlinetutoring.usersservice.domain.entity.User;
@@ -20,6 +17,9 @@ import java.util.List;
 @Transactional
 public class ServiceUserImpl implements IServiceUser {
 
+    private static final String USER_NOT_FOUND = "User not found: ";
+    private static final String SUBJECT_NOT_FOUND = "Subject not found: ";
+
     private final UserRepository userRepository;
     private final SubjectRepository subjectRepository;
 
@@ -32,7 +32,7 @@ public class ServiceUserImpl implements IServiceUser {
     @Transactional(readOnly = true)
     public User getById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found: " + id));
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + id));
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ServiceUserImpl implements IServiceUser {
         }
 
         User existing = userRepository.findById(user.getId())
-                .orElseThrow(() -> new EntityNotFoundException("User not found: " + user.getId()));
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + user.getId()));
 
         existing.setFirstName(user.getFirstName());
         existing.setLastName(user.getLastName());
@@ -61,31 +61,31 @@ public class ServiceUserImpl implements IServiceUser {
     @Override
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new EntityNotFoundException("User not found: " + id);
+            throw new EntityNotFoundException(USER_NOT_FOUND + id);
         }
         userRepository.deleteById(id);
     }
 
     @Override
     public User assignSubject(Long userId, Long subjectId) {
-        User user = getById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + userId));
         Subject subject = subjectRepository.findById(subjectId)
-                .orElseThrow(() -> new EntityNotFoundException("Subject not found: " + subjectId));
+                .orElseThrow(() -> new EntityNotFoundException(SUBJECT_NOT_FOUND + subjectId));
 
-        user.getSubjects().add(subject);   // owning side is User (has @JoinTable)
+        user.getSubjects().add(subject); // owning side is User (has @JoinTable)
         return user; // managed; changes flushed on tx commit
     }
 
     @Override
     public User removeSubject(Long userId, Long subjectId) {
-        User user = getById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND + userId));
         Subject subject = subjectRepository.findById(subjectId)
-                .orElseThrow(() -> new EntityNotFoundException("Subject not found: " + subjectId));
+                .orElseThrow(() -> new EntityNotFoundException(SUBJECT_NOT_FOUND + subjectId));
 
         user.getSubjects().remove(subject);
         return user;
     }
 
-
 }
-

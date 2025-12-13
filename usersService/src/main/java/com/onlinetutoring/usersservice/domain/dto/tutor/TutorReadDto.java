@@ -17,12 +17,12 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class TutorReadDto implements Serializable {
-    Long id;
-    String firstName;
-    String lastName;
-    String email;
-    Role role;
-    String bio;
-    Set<SubjectReadDto> subjects;
-    Set<QualificationReadDto> qualifications;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private Role role;
+    private String bio;
+    private Set<SubjectReadDto> subjects;
+    private Set<QualificationReadDto> qualifications;
 }

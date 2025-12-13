@@ -15,10 +15,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
 public class UserReadDto implements Serializable {
-    Long id;
-    String firstName;
-    String lastName;
-    String email;
-    Role role;
-    Set<SubjectReadDto> subjects;
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private Role role;
+    private Set<SubjectReadDto> subjects;
 }

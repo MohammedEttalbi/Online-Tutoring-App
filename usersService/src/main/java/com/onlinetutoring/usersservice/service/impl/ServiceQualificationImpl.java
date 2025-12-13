@@ -1,4 +1,4 @@
-package com.onlinetutoring.usersservice.service.Impl;
+package com.onlinetutoring.usersservice.service.impl;
 
 import com.onlinetutoring.usersservice.domain.entity.Qualification;
 import com.onlinetutoring.usersservice.repository.QualificationRepository;
@@ -46,9 +46,6 @@ public class ServiceQualificationImpl implements IServiceQualification {
 
         existing.setTitle(qualification.getTitle());
         existing.setInstitution(qualification.getInstitution());
-
-
-
 
         return existing;
     }
